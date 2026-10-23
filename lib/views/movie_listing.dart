@@ -133,8 +133,8 @@ class MovieListing extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF50BCD8),
-                  foregroundColor: Colors.white,
+                  backgroundColor: cinemaBrand,
+                  foregroundColor: cinemaFontWhite,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
