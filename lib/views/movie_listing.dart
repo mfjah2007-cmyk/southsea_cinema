@@ -121,7 +121,7 @@ class MovieListing extends StatelessWidget {
                     'Adult (£7.50)',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white,
+                      color: Colors.blue,
                     ),
                   ),
                 ],
@@ -147,5 +147,7 @@ class MovieListing extends StatelessWidget {
       ),
     );
   }
+
+  
 }
 
