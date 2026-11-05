@@ -1,9 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-class MovieListing extends StatelessWidget {
+class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
+
+  @override
+  State<MovieListing> createState() => _MovieListingState();
+}
+
+class _MovieListingState extends State<MovieListing> {
+  int _ticketQuantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,6 @@ class MovieListing extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Movie title
               const Text(
                 'The Maze Runner (2014) (PG-13)',
                 style: TextStyle(
@@ -35,7 +42,6 @@ class MovieListing extends StatelessWidget {
 
               const SizedBox(height: 40),
 
-              // Cinema room
               const Text(
                 'Southsea Cinema Room',
                 style: TextStyle(
@@ -46,7 +52,6 @@ class MovieListing extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Screening date and time
               const Text(
                 'Thursday 15 Oct 2026, 18:00 - ends at 19:53',
                 style: TextStyle(
@@ -57,7 +62,6 @@ class MovieListing extends StatelessWidget {
 
               const SizedBox(height: 50),
 
-              // Discounts notice
               const Text(
                 'Please note that Discounts / Membership Benefits '
                 'will be applied once you have selected your tickets',
@@ -69,7 +73,6 @@ class MovieListing extends StatelessWidget {
 
               const SizedBox(height: 22),
 
-              // Ticket quantity instructions
               const Text(
                 'Select Quantities (Up to 5 in total)',
                 style: TextStyle(
@@ -80,7 +83,6 @@ class MovieListing extends StatelessWidget {
 
               const SizedBox(height: 44),
 
-              // Tickets heading
               const Text(
                 'Tickets',
                 style: TextStyle(
@@ -92,27 +94,26 @@ class MovieListing extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // Ticket quantity and price
               Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey),
-                    ),
-                    child: DropdownButton<int>(
-                      value: 0,
-                      underline: const SizedBox.shrink(),
-                      items: List.generate(
-                        6,
-                        (index) => DropdownMenuItem(
-                          value: index,
-                          child: Text('$index'),
-                        ),
-                      ),
-                      onChanged: (value) {},
-                    ),
+                  DropdownMenu<int>(
+                    initialSelection: _ticketQuantity,
+                    onSelected: (int? value) {
+                      if (value != null) {
+                        setState(() {
+                          _ticketQuantity = value;
+                          print('Tickets selected: $_ticketQuantity');
+                        });
+                      }
+                    },
+                    dropdownMenuEntries: [
+                      DropdownMenuEntry(value: 0, label: '0'),
+                      DropdownMenuEntry(value: 1, label: '1'),
+                      DropdownMenuEntry(value: 2, label: '2'),
+                      DropdownMenuEntry(value: 3, label: '3'),
+                      DropdownMenuEntry(value: 4, label: '4'),
+                      DropdownMenuEntry(value: 5, label: '5'),
+                    ],
                   ),
 
                   const SizedBox(width: 12),
@@ -129,7 +130,6 @@ class MovieListing extends StatelessWidget {
 
               const SizedBox(height: 34),
 
-              // Add to order button
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -147,7 +147,8 @@ class MovieListing extends StatelessWidget {
       ),
     );
   }
-
-  
 }
+
+
+// Add a function(ality) when elevated button is pressed and also use the variable in a text
 
