@@ -12,6 +12,7 @@ class MovieListing extends StatefulWidget {
 
 class _MovieListingState extends State<MovieListing> {
   int _ticketQuantity = 0;
+  String _bookingMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +132,12 @@ class _MovieListingState extends State<MovieListing> {
               const SizedBox(height: 34),
 
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _bookingMessage =
+                        'Added $_ticketQuantity tickets to the order';
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: cinemaBrand,
                   foregroundColor: cinemaFontWhite,
@@ -141,6 +147,16 @@ class _MovieListingState extends State<MovieListing> {
                 ),
                 child: const Text('ADD TO ORDER'),
               ),
+
+              const SizedBox(height: 15),
+
+              Text(
+                _bookingMessage,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
             ],
           ),
         ),
@@ -148,6 +164,7 @@ class _MovieListingState extends State<MovieListing> {
     );
   }
 }
+
 
 
 // Add a function(ality) when elevated button is pressed and also use the variable in a text
