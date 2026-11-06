@@ -123,7 +123,7 @@ class _MovieListingState extends State<MovieListing> {
                     'Adult (£7.50)',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.blue,
+                      color: cinemaBrand,
                     ),
                   ),
                 ],
@@ -154,7 +154,7 @@ class _MovieListingState extends State<MovieListing> {
                 _bookingMessage,
                 style: const TextStyle(
                   fontSize: 16,
-                  color: Colors.white,
+                  color: cinemaFontWhite,
                 ),
               ),
             ],
