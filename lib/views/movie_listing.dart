@@ -1,6 +1,6 @@
-import 'package:southsea_cinema/models/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 class MovieListing extends StatefulWidget {
@@ -18,20 +18,28 @@ class MovieListing extends StatefulWidget {
 class _MovieListingState extends State<MovieListing> {
   int _ticketQuantity = 0;
   String _bookingMessage = '';
-  double get _totalPrice =>
-    _ticketQuantity * widget.movie.ticketPrice;
 
+  // Calculate the total ticket price.
+  double get _totalPrice {
+    return _ticketQuantity * widget.movie.ticketPrice;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(appTitle, style: cinemaHeaderStyle),
+        // Display the selected movie's title.
+        title: Text(
+          widget.movie.title,
+          style: cinemaHeaderStyle,
+        ),
         backgroundColor: cinemaSurface,
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
       ),
+
       drawer: const NavDrawer(),
+
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -41,52 +49,60 @@ class _MovieListingState extends State<MovieListing> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Movie title and age rating.
               Text(
-  '${widget.movie.title} (${widget.movie.ageRating})',
-  style: const TextStyle(
-    fontSize: 28,
-    color: cinemaFontWhite,
-  ),
-),
-const SizedBox(height: 20),
-
-Image.asset(
-  widget.movie.imagePath,
-  height: 220,
-  width: double.infinity,
-  fit: BoxFit.contain,
-),
- 
-const SizedBox(height: 20),
-
-Text(
-  widget.movie.synopsis,
-  style: const TextStyle(
-    fontSize: 16,
-    color: Colors.white,
-  ),
-),
-              const SizedBox(height: 40),
-
-              const Text(
-                'Southsea Cinema Room',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
+                '${widget.movie.title} (${widget.movie.ageRating})',
+                style: const TextStyle(
+                  fontSize: 28,
+                  color: cinemaFontWhite,
                 ),
               ),
 
               const SizedBox(height: 20),
 
-Text(
-  widget.movie.screeningTime,
-  style: const TextStyle(
-    fontSize: 16,
-    color: Colors.white,
-  ),
-),
+              // Display the complete movie poster.
+              SizedBox(
+                height: 220,
+                width: double.infinity,
+                child: Image.asset(
+                  widget.movie.imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
+
+              // Movie synopsis.
+              Text(
+                widget.movie.synopsis,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              const Text(
+                'Southsea Cinema Room',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Screening date and time.
+              Text(
+                widget.movie.screeningTime,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 30),
 
               const Text(
                 'Please note that Discounts / Membership Benefits '
@@ -107,7 +123,7 @@ Text(
                 ),
               ),
 
-              const SizedBox(height: 44),
+              const SizedBox(height: 30),
 
               const Text(
                 'Tickets',
@@ -120,6 +136,7 @@ Text(
 
               const SizedBox(height: 12),
 
+              // Allow the customer to select the number of tickets.
               Row(
                 children: [
                   DropdownMenu<int>(
@@ -128,24 +145,23 @@ Text(
                       if (value != null) {
                         setState(() {
                           _ticketQuantity = value;
-                         print('Tickets selected: $_ticketQuantity');
                         });
                       }
                     },
                     dropdownMenuEntries: [
-                      DropdownMenuEntry(value: 0, label: '0'),
-                      DropdownMenuEntry(value: 1, label: '1'),
-                      DropdownMenuEntry(value: 2, label: '2'),
-                      DropdownMenuEntry(value: 3, label: '3'),
-                      DropdownMenuEntry(value: 4, label: '4'),
-                      DropdownMenuEntry(value: 5, label: '5'),
+                      for (int i = 0; i <= 5; i++)
+                        DropdownMenuEntry(
+                          value: i,
+                          label: '$i',
+                        ),
                     ],
                   ),
 
                   const SizedBox(width: 12),
 
-Text('Adult (£${widget.movie.ticketPrice.toStringAsFixed(2)})',
-                    style: TextStyle(
+                  Text(
+                    'Adult (£${widget.movie.ticketPrice.toStringAsFixed(2)})',
+                    style: const TextStyle(
                       fontSize: 16,
                       color: cinemaBrand,
                     ),
@@ -153,13 +169,27 @@ Text('Adult (£${widget.movie.ticketPrice.toStringAsFixed(2)})',
                 ],
               ),
 
-              const SizedBox(height: 34),
+              const SizedBox(height: 20),
 
+              // Display the calculated total.
+              Text(
+                'Total: £${_totalPrice.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // Add the selected tickets to the order.
               ElevatedButton(
                 onPressed: () {
                   setState(() {
                     _bookingMessage =
-                        'Added $_ticketQuantity tickets to the order';
+                        'Added $_ticketQuantity tickets. '
+                        'Total: £${_totalPrice.toStringAsFixed(2)}';
                   });
                 },
                 style: ElevatedButton.styleFrom(
@@ -188,8 +218,3 @@ Text('Adult (£${widget.movie.ticketPrice.toStringAsFixed(2)})',
     );
   }
 }
-
-
-
-// Add a function(ality) when elevated button is pressed and also use the variable in a text
-
