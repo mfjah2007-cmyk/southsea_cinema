@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
@@ -50,6 +51,7 @@ class _MovieListingState extends State<MovieListing> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Display the movie title and age rating.
               Text(
                 '${widget.movie.title} (${widget.movie.ageRating})',
                 style: const TextStyle(
@@ -60,6 +62,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
+              // Display the complete movie poster.
               SizedBox(
                 height: 220,
                 width: double.infinity,
@@ -71,6 +74,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
+              // Display the movie synopsis.
               Text(
                 widget.movie.synopsis,
                 style: const TextStyle(
@@ -91,6 +95,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
+              // Display the screening date and time.
               Text(
                 widget.movie.screeningTime,
                 style: const TextStyle(
@@ -122,6 +127,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 12),
 
+              // Allow customers to select their ticket quantity.
               Row(
                 children: [
                   DropdownMenu<int>(
@@ -157,6 +163,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
+              // Display the calculated total price.
               Text(
                 'Total: £${_totalPrice.toStringAsFixed(2)}',
                 style: const TextStyle(
@@ -168,7 +175,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 30),
 
-              // Add the selected tickets to the shared basket.
+              // Add the selected tickets to the basket.
               ElevatedButton(
                 onPressed: () {
                   if (_ticketQuantity == 0) {
@@ -177,14 +184,20 @@ class _MovieListingState extends State<MovieListing> {
                           'Please select at least one ticket.';
                     });
                   } else {
-                    BasketService.addMovie(
+                    // Try to add the tickets to the basket.
+                    bool added = BasketService.addMovie(
                       widget.movie,
                       _ticketQuantity,
                     );
 
                     setState(() {
-                      _bookingMessage =
-                          'Added $_ticketQuantity tickets to your basket.';
+                      if (added) {
+                        _bookingMessage =
+                            'Added $_ticketQuantity tickets to your basket.';
+                      } else {
+                        _bookingMessage =
+                            'You can only order 5 tickets in total.';
+                      }
                     });
                   }
                 },
@@ -200,6 +213,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 15),
 
+              // Display the booking confirmation.
               Text(
                 _bookingMessage,
                 style: const TextStyle(
@@ -210,7 +224,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // Open the basket screen.
+              // Navigate to the basket page.
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
