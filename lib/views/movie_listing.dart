@@ -90,7 +90,7 @@ Text(
                 'will be applied once you have selected your tickets',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.white,
+                  color: cinemaFontWhite,
                 ),
               ),
 
@@ -100,7 +100,7 @@ Text(
                 'Select Quantities (Up to 5 in total)',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.white,
+                  color: cinemaFontWhite,
                 ),
               ),
 
@@ -111,7 +111,7 @@ Text(
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: cinemaFontWhite,
                 ),
               ),
 
