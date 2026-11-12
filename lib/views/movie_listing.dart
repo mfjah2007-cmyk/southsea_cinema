@@ -141,8 +141,7 @@ Text(
 
                   const SizedBox(width: 12),
 
-                  const Text(
-                    'Adult (£7.50)',
+Text('Adult (£${widget.movie.ticketPrice.toStringAsFixed(2)})',
                     style: TextStyle(
                       fontSize: 16,
                       color: cinemaBrand,
