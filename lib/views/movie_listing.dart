@@ -53,7 +53,16 @@ Image.asset(
   width: double.infinity,
   fit: BoxFit.contain,
 ),
+ 
+const SizedBox(height: 20),
 
+Text(
+  widget.movie.synopsis,
+  style: const TextStyle(
+    fontSize: 16,
+    color: Colors.white,
+  ),
+),
               const SizedBox(height: 40),
 
               const Text(
