@@ -75,13 +75,13 @@ Text(
 
               const SizedBox(height: 20),
 
-              const Text(
-                'Thursday 15 Oct 2026, 18:00 - ends at 19:53',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
+Text(
+  widget.movie.screeningTime,
+  style: const TextStyle(
+    fontSize: 16,
+    color: Colors.white,
+  ),
+),
 
               const SizedBox(height: 50),
 
