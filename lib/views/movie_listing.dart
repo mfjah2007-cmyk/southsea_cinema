@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
@@ -16,7 +17,10 @@ class MovieListing extends StatefulWidget {
 }
 
 class _MovieListingState extends State<MovieListing> {
+  // Stores the number of tickets selected.
   int _ticketQuantity = 0;
+
+  // Stores the confirmation message.
   String _bookingMessage = '';
 
   // Calculate the total ticket price.
@@ -28,7 +32,6 @@ class _MovieListingState extends State<MovieListing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Display the selected movie's title.
         title: Text(
           widget.movie.title,
           style: cinemaHeaderStyle,
@@ -46,10 +49,12 @@ class _MovieListingState extends State<MovieListing> {
           margin: const EdgeInsets.all(5),
           padding: const EdgeInsets.all(18),
           color: cinemaSurface,
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Movie title and age rating.
+
+              // Display the movie title and age rating.
               Text(
                 '${widget.movie.title} (${widget.movie.ageRating})',
                 style: const TextStyle(
@@ -60,7 +65,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // Display the complete movie poster.
+              // Display the movie poster.
               SizedBox(
                 height: 220,
                 width: double.infinity,
@@ -72,7 +77,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // Movie synopsis.
+              // Display the movie synopsis.
               Text(
                 widget.movie.synopsis,
                 style: const TextStyle(
@@ -93,7 +98,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // Screening date and time.
+              // Display the screening date and time.
               Text(
                 widget.movie.screeningTime,
                 style: const TextStyle(
@@ -136,21 +141,27 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 12),
 
-              // Allow the customer to select the number of tickets.
+              // Let the customer select their ticket quantity.
               Row(
                 children: [
                   DropdownMenu<int>(
                     initialSelection: _ticketQuantity,
+
                     onSelected: (int? value) {
                       if (value != null) {
                         setState(() {
                           _ticketQuantity = value;
+
+                          // Clear the old confirmation when
+                          // the customer changes their selection.
+                          _bookingMessage = '';
                         });
                       }
                     },
+
                     dropdownMenuEntries: [
                       for (int i = 0; i <= 5; i++)
-                        DropdownMenuEntry(
+                        DropdownMenuEntry<int>(
                           value: i,
                           label: '$i',
                         ),
@@ -171,7 +182,7 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 20),
 
-              // Display the calculated total.
+              // Automatically update the total price.
               Text(
                 'Total: £${_totalPrice.toStringAsFixed(2)}',
                 style: const TextStyle(
@@ -187,11 +198,17 @@ class _MovieListingState extends State<MovieListing> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    _bookingMessage =
-                        'Added $_ticketQuantity tickets. '
-                        'Total: £${_totalPrice.toStringAsFixed(2)}';
+                    if (_ticketQuantity == 0) {
+                      _bookingMessage =
+                          'Please select at least one ticket.';
+                    } else {
+                      _bookingMessage =
+                          'Added $_ticketQuantity tickets. '
+                          'Total: £${_totalPrice.toStringAsFixed(2)}';
+                    }
                   });
                 },
+
                 style: ElevatedButton.styleFrom(
                   backgroundColor: cinemaBrand,
                   foregroundColor: cinemaFontWhite,
@@ -199,11 +216,13 @@ class _MovieListingState extends State<MovieListing> {
                     borderRadius: BorderRadius.zero,
                   ),
                 ),
+
                 child: const Text('ADD TO ORDER'),
               ),
 
               const SizedBox(height: 15),
 
+              // Display the booking confirmation.
               Text(
                 _bookingMessage,
                 style: const TextStyle(
