@@ -24,7 +24,7 @@ class MovieCard extends StatelessWidget {
           children: [
             Image.asset(
               movie.imagePath,
-              height: 180,
+              height: 160,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
