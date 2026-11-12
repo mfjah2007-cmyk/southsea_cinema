@@ -18,6 +18,9 @@ class MovieListing extends StatefulWidget {
 class _MovieListingState extends State<MovieListing> {
   int _ticketQuantity = 0;
   String _bookingMessage = '';
+  double get _totalPrice =>
+    _ticketQuantity * widget.movie.ticketPrice;
+
 
   @override
   Widget build(BuildContext context) {
