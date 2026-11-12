@@ -38,13 +38,21 @@ class _MovieListingState extends State<MovieListing> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'The Maze Runner (2014) (PG-13)',
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.white,
-                ),
-              ),
+              Text(
+  '${widget.movie.title} (${widget.movie.ageRating})',
+  style: const TextStyle(
+    fontSize: 28,
+    color: cinemaFontWhite,
+  ),
+),
+const SizedBox(height: 20),
+
+Image.asset(
+  widget.movie.imagePath,
+  height: 220,
+  width: double.infinity,
+  fit: BoxFit.contain,
+),
 
               const SizedBox(height: 40),
 
