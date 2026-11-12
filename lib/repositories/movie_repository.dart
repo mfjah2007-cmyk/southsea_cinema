@@ -2,8 +2,10 @@
 import 'package:southsea_cinema/models/movie.dart';
 
 class MovieRepository {
+  // This method returns all the movies available in the cinema.
   List<Movie> getMovies() {
     return [
+      // First movie
       const Movie(
         id: '1',
         title: 'The Maze Runner',
@@ -13,6 +15,20 @@ class MovieRepository {
         ticketPrice: 7.50,
         imagePath: 'assets/images/maze_runner.jpeg',
       ),
+
+      // Second movie
+      const Movie(
+        id: '2',
+        title: 'The Hunger Games',
+        synopsis:
+            'A young woman takes part in a dangerous televised competition.',
+        ageRating: '12A',
+        screeningTime: 'Friday 16 Oct 2026, 18:00',
+        ticketPrice: 7.50,
+        imagePath: 'assets/images/hunger_games.jpeg',
+      ),
     ];
   }
 }
+
+
