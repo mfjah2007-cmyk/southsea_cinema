@@ -29,6 +29,21 @@ class MovieRepository {
       ),
     ];
   }
+// Find a movie using its ID.
+Movie? getMovieById(String id) {
+  // Get all available movies.
+  final movies = getMovies();
+
+  // Search for a movie with a matching ID.
+  for (Movie movie in movies) {
+    if (movie.id == id) {
+      return movie;
+    }
+  }
+
+  // Return null if no movie was found.
+  return null;
+}
 }
 
 
