@@ -1,3 +1,4 @@
+
 import 'package:southsea_cinema/models/movie.dart';
 
 class BasketItem {
@@ -52,7 +53,7 @@ class BasketService {
     return true;
   }
 
-  // Calculate the basket total.
+  // Calculate the total basket price.
   static double get totalPrice {
     double total = 0;
 
@@ -63,8 +64,13 @@ class BasketService {
     return total;
   }
 
-  // Remove a movie.
+  // Remove a movie from the basket.
   static void removeMovie(int index) {
     items.removeAt(index);
+  }
+
+  // Empty the basket after a booking is confirmed.
+  static void clearBasket() {
+    items.clear();
   }
 }
