@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
@@ -39,9 +38,7 @@ class _MovieListingState extends State<MovieListing> {
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
       ),
-
       drawer: const NavDrawer(),
-
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -148,9 +145,7 @@ class _MovieListingState extends State<MovieListing> {
                         ),
                     ],
                   ),
-
                   const SizedBox(width: 12),
-
                   Text(
                     'Adult (${widget.movie.formattedPrice})',
                     style: const TextStyle(
@@ -180,8 +175,7 @@ class _MovieListingState extends State<MovieListing> {
                 onPressed: () {
                   if (_ticketQuantity == 0) {
                     setState(() {
-                      _bookingMessage =
-                          'Please select at least one ticket.';
+                      _bookingMessage = 'Please select at least one ticket.';
                     });
                   } else {
                     // Try to add the tickets to the basket.

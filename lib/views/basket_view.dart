@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/services/basket_service.dart';
@@ -25,9 +24,7 @@ class _BasketViewState extends State<BasketView> {
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
       ),
-
       drawer: const NavDrawer(),
-
       body: BasketService.items.isEmpty
           ? const Center(
               child: Text(
@@ -41,7 +38,6 @@ class _BasketViewState extends State<BasketView> {
           : ListView(
               padding: const EdgeInsets.all(12),
               children: [
-
                 // Display every movie in the basket.
                 for (int i = 0; i < BasketService.items.length; i++)
                   Card(
@@ -52,7 +48,6 @@ class _BasketViewState extends State<BasketView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
                           Text(
                             BasketService.items[i].movie.title,
                             style: const TextStyle(

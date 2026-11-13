@@ -32,7 +32,6 @@ class HomeView extends StatelessWidget {
         itemBuilder: (context, index) {
           return MovieCard(
             movie: movies[index],
-
             onBook: () {
               // Open a separate booking page for the selected movie.
               Navigator.push(

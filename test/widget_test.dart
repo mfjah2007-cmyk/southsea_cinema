@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
 
@@ -6,7 +5,6 @@ void main() {
   // Test that the cinema home page displays correctly.
   testWidgets('Home page displays movies and booking buttons',
       (WidgetTester tester) async {
-
     // Start the cinema application.
     await tester.pumpWidget(const SouthseaCinemaApp());
 
@@ -21,4 +19,3 @@ void main() {
     expect(find.text('BOOK NOW'), findsNWidgets(2));
   });
 }
-

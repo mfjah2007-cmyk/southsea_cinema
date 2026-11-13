@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/services/basket_service.dart';
@@ -15,11 +14,9 @@ class _CheckoutViewState extends State<CheckoutView> {
   final _formKey = GlobalKey<FormState>();
 
   // Store the customer's name and email.
-  final TextEditingController _nameController =
-      TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
-  final TextEditingController _emailController =
-      TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   // Store the confirmed booking information.
   bool _bookingConfirmed = false;
@@ -78,15 +75,12 @@ class _CheckoutViewState extends State<CheckoutView> {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-
                     const Icon(
                       Icons.check_circle,
                       color: Colors.green,
                       size: 80,
                     ),
-
                     const SizedBox(height: 20),
-
                     const Text(
                       'Booking Confirmed!',
                       style: TextStyle(
@@ -95,9 +89,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         color: cinemaFontWhite,
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
                     Text(
                       'Thank you, $_confirmedName.',
                       style: const TextStyle(
@@ -105,27 +97,21 @@ class _CheckoutViewState extends State<CheckoutView> {
                         color: cinemaFontWhite,
                       ),
                     ),
-
                     const SizedBox(height: 10),
-
                     Text(
                       'Confirmation email: $_confirmedEmail',
                       style: const TextStyle(
                         color: cinemaFontWhite,
                       ),
                     ),
-
                     const SizedBox(height: 15),
-
                     Text(
                       'Tickets booked: $_confirmedTickets',
                       style: const TextStyle(
                         color: cinemaFontWhite,
                       ),
                     ),
-
                     const SizedBox(height: 10),
-
                     Text(
                       'Total: £${_confirmedTotal.toStringAsFixed(2)}',
                       style: const TextStyle(
@@ -134,9 +120,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         color: cinemaFontWhite,
                       ),
                     ),
-
                     const SizedBox(height: 25),
-
                     const Text(
                       'Your booking has been confirmed in this demonstration.',
                       textAlign: TextAlign.center,
@@ -144,9 +128,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         color: cinemaFontWhite,
                       ),
                     ),
-
                     const SizedBox(height: 25),
-
                     ElevatedButton(
                       onPressed: () {
                         // Return to the home page.
@@ -166,7 +148,6 @@ class _CheckoutViewState extends State<CheckoutView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   const Text(
                     'Order Summary',
                     style: TextStyle(
@@ -235,7 +216,6 @@ class _CheckoutViewState extends State<CheckoutView> {
                     key: _formKey,
                     child: Column(
                       children: [
-
                         TextFormField(
                           controller: _nameController,
                           decoration: const InputDecoration(
@@ -243,17 +223,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                             border: OutlineInputBorder(),
                           ),
                           validator: (value) {
-                            if (value == null ||
-                                value.trim().isEmpty) {
+                            if (value == null || value.trim().isEmpty) {
                               return 'Please enter your name.';
                             }
 
                             return null;
                           },
                         ),
-
                         const SizedBox(height: 20),
-
                         TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -272,9 +249,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                             return null;
                           },
                         ),
-
                         const SizedBox(height: 30),
-
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
