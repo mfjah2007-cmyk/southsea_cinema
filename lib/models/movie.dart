@@ -16,4 +16,9 @@ class Movie {
     required this.ticketPrice,
     required this.imagePath,
   });
+// Return the ticket price formatted to two decimal places.
+String get formattedPrice {
+  return '£${ticketPrice.toStringAsFixed(2)}';
+}
+
 }
