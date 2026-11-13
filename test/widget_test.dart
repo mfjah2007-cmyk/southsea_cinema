@@ -11,7 +11,7 @@ void main() {
     await tester.pumpWidget(const SouthseaCinemaApp());
 
     // Check that the application title is displayed.
-    expect(find.text('Southsea Cinema & Arts'), findsOneWidget);
+    expect(find.text('Southsea Cinema & Arts Centre'), findsOneWidget);
 
     // Check that both movie titles are displayed.
     expect(find.text('The Maze Runner'), findsOneWidget);
