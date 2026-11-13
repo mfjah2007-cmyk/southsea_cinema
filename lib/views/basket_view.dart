@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/services/basket_service.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/views/checkout_view.dart';
 
 class BasketView extends StatefulWidget {
   const BasketView({super.key});
@@ -39,6 +41,7 @@ class _BasketViewState extends State<BasketView> {
           : ListView(
               padding: const EdgeInsets.all(12),
               children: [
+
                 // Display every movie in the basket.
                 for (int i = 0; i < BasketService.items.length; i++)
                   Card(
@@ -49,6 +52,7 @@ class _BasketViewState extends State<BasketView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+
                           Text(
                             BasketService.items[i].movie.title,
                             style: const TextStyle(
@@ -88,7 +92,7 @@ class _BasketViewState extends State<BasketView> {
 
                           const SizedBox(height: 8),
 
-                          // Remove this movie from the basket.
+                          // Remove the selected movie.
                           TextButton(
                             onPressed: () {
                               setState(() {
@@ -112,6 +116,26 @@ class _BasketViewState extends State<BasketView> {
                     fontWeight: FontWeight.bold,
                     color: cinemaFontWhite,
                   ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Open the checkout page.
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CheckoutView(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: cinemaBrand,
+                    foregroundColor: cinemaFontWhite,
+                    padding: const EdgeInsets.all(15),
+                  ),
+                  child: const Text('PROCEED TO CHECKOUT'),
                 ),
               ],
             ),
