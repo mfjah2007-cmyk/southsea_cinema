@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/services/basket_service.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/views/basket_view.dart';
 
 void main() {
   // Create a movie to use in the tests.
@@ -28,8 +29,11 @@ void main() {
   // Open the movie listing screen.
   Future<void> openMovieListing(WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: MovieListing(movie: testMovie),
+      MaterialApp(
+        home: const MovieListing(movie: testMovie),
+        routes: {
+          '/basket': (context) => const BasketView(),
+        },
       ),
     );
     await tester.pumpAndSettle();
@@ -53,7 +57,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  // Test that selecting tickets updates the total price.
+  // Test 1: Selecting tickets updates the total price.
   testWidgets('Selecting tickets updates the total price',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -63,7 +67,7 @@ void main() {
     expect(find.text('Total: £15.00'), findsOneWidget);
   });
 
-  // Test that adding tickets displays a confirmation.
+  // Test 2: Adding tickets displays a confirmation.
   testWidgets('Adding tickets displays a confirmation',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -75,7 +79,6 @@ void main() {
 
     await tester.tap(find.text('ADD TO ORDER'));
     await tester.pumpAndSettle();
-    await tester.pumpAndSettle();
 
     expect(
       find.text('Added 2 tickets to your basket.'),
@@ -85,30 +88,26 @@ void main() {
     expect(BasketService.instance.totalQuantity, 2);
   });
 
-  // Test that customers cannot add zero tickets.// Test that customers cannot add zero tickets.
+  // Test 3: Customers cannot add zero tickets.
   testWidgets('Adding zero tickets displays a warning',
       (WidgetTester tester) async {
     await openMovieListing(tester);
 
-    // Scroll the button into view.
     await tester.ensureVisible(find.text('ADD TO ORDER'));
     await tester.pumpAndSettle();
 
-    // Tap the button without selecting any tickets.
     await tester.tap(find.text('ADD TO ORDER'));
     await tester.pumpAndSettle();
 
-    // Check that the warning is displayed.
     expect(
       find.text('Please select at least one ticket.'),
       findsOneWidget,
     );
 
-    // Check that no tickets were added.
     expect(BasketService.instance.totalQuantity, 0);
   });
 
-  // Test that the five-ticket limit is enforced.
+  // Test 4: The five-ticket limit is enforced.
   testWidgets('Adding more than five tickets is prevented',
       (WidgetTester tester) async {
     BasketService.instance.addMovie(testMovie, 4);
@@ -122,7 +121,6 @@ void main() {
 
     await tester.tap(find.text('ADD TO ORDER'));
     await tester.pumpAndSettle();
-    await tester.pumpAndSettle();
 
     expect(
       find.text('You can only order 5 tickets in total.'),
@@ -130,5 +128,16 @@ void main() {
     );
 
     expect(BasketService.instance.totalQuantity, 4);
+  });
+
+  // Test 5: The basket button opens the basket screen.
+  testWidgets('Basket button opens the basket screen',
+      (WidgetTester tester) async {
+    await openMovieListing(tester);
+
+    await tester.tap(find.byTooltip('Open basket'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('My Basket'), findsOneWidget);
   });
 }
