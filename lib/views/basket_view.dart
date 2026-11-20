@@ -92,7 +92,7 @@ class _BasketViewState extends State<BasketView> {
                   ),
                 const SizedBox(height: 15),
                 Text(
-                  'Basket Total: £${BasketService.totalPrice.toStringAsFixed(2)}',
+                  'Basket Total: £${BasketService.instance.totalPrice.toStringAsFixed(2)}',
                   style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,

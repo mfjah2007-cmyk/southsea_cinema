@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 // Application title.
@@ -40,4 +39,3 @@ const TextStyle cinemaSubtitleStyle = TextStyle(
   color: cinemaFontMuted,
   fontSize: 14,
 );
-

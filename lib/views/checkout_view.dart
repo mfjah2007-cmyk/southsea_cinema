@@ -39,8 +39,8 @@ class _CheckoutViewState extends State<CheckoutView> {
       // Save the order information before clearing the basket.
       final customerName = _nameController.text.trim();
       final customerEmail = _emailController.text.trim();
-      final orderTotal = BasketService.totalPrice;
-      final ticketCount = BasketService.totalQuantity;
+      final orderTotal = BasketService.instance.totalPrice;
+      final ticketCount = BasketService.instance.totalQuantity;
 
       setState(() {
         _confirmedName = customerName;
@@ -194,7 +194,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   const SizedBox(height: 15),
 
                   Text(
-                    'Total: £${BasketService.totalPrice.toStringAsFixed(2)}',
+                    'Total: £${BasketService.instance.totalPrice.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,

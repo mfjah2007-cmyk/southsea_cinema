@@ -1,4 +1,3 @@
-
 import 'package:southsea_cinema/models/movie.dart';
 
 class BasketItem {
@@ -81,4 +80,3 @@ class BasketService {
     items.clear();
   }
 }
-
