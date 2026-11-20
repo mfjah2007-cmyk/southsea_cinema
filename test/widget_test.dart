@@ -5,7 +5,7 @@ void main() {
   // Initialise Flutter before running tests.
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  // Test that the cinema home page displays correctly.
+  
   testWidgets('Home page displays movies and booking buttons',
       (WidgetTester tester) async {
     // Start the cinema application.
@@ -28,7 +28,7 @@ void main() {
     expect(find.byTooltip('Open basket'), findsOneWidget);
   });
 
-  // Test that the basket button opens the basket page.
+  
   testWidgets('Basket button opens the basket page',
       (WidgetTester tester) async {
     // Start the cinema application.
@@ -38,8 +38,12 @@ void main() {
     await tester.pumpAndSettle();
 
     // Tap the basket button.
+    // Tap the basket button.
     await tester.tap(find.byTooltip('Open basket'));
-    await tester.pumpAndSettle();
+
+// Allow the basket page to appear.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
 
     // Check that the basket page is displayed.
     expect(find.text('My Basket'), findsOneWidget);
