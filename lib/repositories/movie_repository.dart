@@ -1,38 +1,25 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:southsea_cinema/models/movie.dart';
 
 class MovieRepository {
-  // This method returns all the movies available in the cinema.
-  List<Movie> getMovies() {
-    return [
-      // First movie
-      const Movie(
-        id: '1',
-        title: 'The Maze Runner',
-        synopsis: 'A young man wakes up in a mysterious maze.',
-        ageRating: 'PG-13',
-        screeningTime: 'Thursday 15 Oct 2026, 18:00',
-        ticketPrice: 7.50,
-        imagePath: 'assets/images/maze_runner.jpeg',
-      ),
+  // Load movies from the JSON asset file.
+  Future<List<Movie>> getMovies() async {
+    // Read the JSON file.
+    final String response =
+        await rootBundle.loadString('assets/data/movies.json');
 
-      // Second movie
-      const Movie(
-        id: '2',
-        title: 'The Hunger Games',
-        synopsis:
-            'A young woman takes part in a dangerous televised competition.',
-        ageRating: '12A',
-        screeningTime: 'Friday 16 Oct 2026, 18:00',
-        ticketPrice: 7.50,
-        imagePath: 'assets/images/hunger_games.jpeg',
-      ),
-    ];
+    // Convert the JSON text into a Dart list.
+    final List<dynamic> data = jsonDecode(response);
+
+    // Convert each JSON entry into a Movie object.
+    return data.map((movie) => Movie.fromJson(movie)).toList();
   }
 
-// Find a movie using its ID.
-  Movie? getMovieById(String id) {
-    // Get all available movies.
-    final movies = getMovies();
+  // Find a movie using its ID.
+  Future<Movie?> getMovieById(String id) async {
+    // Load all available movies.
+    final movies = await getMovies();
 
     // Search for a movie with a matching ID.
     for (Movie movie in movies) {
