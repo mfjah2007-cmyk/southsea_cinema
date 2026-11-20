@@ -16,7 +16,21 @@ class Movie {
     required this.ticketPrice,
     required this.imagePath,
   });
-// Return the ticket price formatted to two decimal places.
+
+  // Create a Movie object from JSON data.
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      synopsis: json['synopsis'] as String,
+      ageRating: json['ageRating'] as String,
+      screeningTime: json['screeningTime'] as String,
+      ticketPrice: (json['ticketPrice'] as num).toDouble(),
+      imagePath: json['imagePath'] as String,
+    );
+  }
+
+  // Return the ticket price formatted to two decimal places.
   String get formattedPrice {
     return '£${ticketPrice.toStringAsFixed(2)}';
   }
