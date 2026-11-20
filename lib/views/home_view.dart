@@ -4,6 +4,7 @@ import 'package:southsea_cinema/repositories/movie_repository.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/widgets/basket_button.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -22,7 +23,8 @@ class HomeView extends StatelessWidget {
         backgroundColor: cinemaSurface,
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
-      ),
+        actions: const [
+          BasketButton(),]     ),
 
       drawer: const NavDrawer(),
 
