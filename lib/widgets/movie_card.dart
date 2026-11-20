@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/widgets/primary_button.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -33,7 +35,7 @@ class MovieCard extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            // Movie title
+            // Movie title.
             Text(
               movie.title,
               style: const TextStyle(
@@ -73,10 +75,10 @@ class MovieCard extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            // Open the booking page for this movie.
-            ElevatedButton(
+            // Reusable booking button.
+            PrimaryButton(
+              label: 'BOOK NOW',
               onPressed: onBook,
-              child: const Text('BOOK NOW'),
             ),
           ],
         ),
@@ -84,3 +86,4 @@ class MovieCard extends StatelessWidget {
     );
   }
 }
+
