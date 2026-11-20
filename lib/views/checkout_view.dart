@@ -11,15 +11,15 @@ class CheckoutView extends StatefulWidget {
 }
 
 class _CheckoutViewState extends State<CheckoutView> {
-  // Used to validate the customer details form.
+  
   final _formKey = GlobalKey<FormState>();
 
-  // Store the customer's name and email.
+  
   final TextEditingController _nameController = TextEditingController();
 
   final TextEditingController _emailController = TextEditingController();
 
-  // Store the confirmed booking information.
+  
   bool _bookingConfirmed = false;
   String _confirmedName = '';
   String _confirmedEmail = '';
@@ -33,10 +33,10 @@ class _CheckoutViewState extends State<CheckoutView> {
     super.dispose();
   }
 
-  // Confirm the booking after validating the form.
+  
   void _confirmBooking() {
     if (_formKey.currentState!.validate()) {
-      // Save the order information before clearing the basket.
+      
       final customerName = _nameController.text.trim();
       final customerEmail = _emailController.text.trim();
       final orderTotal = BasketService.instance.totalPrice;
@@ -51,7 +51,7 @@ class _CheckoutViewState extends State<CheckoutView> {
         _bookingConfirmed = true;
       });
 
-      // Empty the basket after confirmation.
+      
       BasketService.instance.clearBasket();
     }
   }
@@ -72,7 +72,7 @@ class _CheckoutViewState extends State<CheckoutView> {
         ],
       ),
 
-      // Show the confirmation screen after booking.
+      
       body: _bookingConfirmed
           ? Center(
               child: SingleChildScrollView(
@@ -135,7 +135,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                     const SizedBox(height: 25),
                     ElevatedButton(
                       onPressed: () {
-                        // Return to the home page.
+                        
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                       },
@@ -146,7 +146,7 @@ class _CheckoutViewState extends State<CheckoutView> {
               ),
             )
 
-          // Otherwise, display the checkout form.
+          
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -215,7 +215,7 @@ class _CheckoutViewState extends State<CheckoutView> {
 
                   const SizedBox(height: 15),
 
-                  // Customer information form.
+                  
                   Form(
                     key: _formKey,
                     child: Column(

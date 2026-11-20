@@ -26,7 +26,7 @@ void main() {
     BasketService.instance.clearBasket();
   });
 
-  // Open the movie listing screen.
+  
   Future<void> openMovieListing(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -39,25 +39,25 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  // Select a ticket quantity from the dropdown.
+  
   Future<void> selectTickets(
     WidgetTester tester,
     String quantity,
   ) async {
-    // Scroll the dropdown into view.
+    
     await tester.ensureVisible(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();
 
-    // Open the dropdown.
+    
     await tester.tap(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();
 
-    // Select the requested quantity.
+    
     await tester.tap(find.text(quantity).last);
     await tester.pumpAndSettle();
   }
 
-  // Test 1: Selecting tickets updates the total price.
+  
   testWidgets('Selecting tickets updates the total price',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -67,7 +67,7 @@ void main() {
     expect(find.text('Total: £15.00'), findsOneWidget);
   });
 
-  // Test 2: Adding tickets displays a confirmation.
+  
   testWidgets('Adding tickets displays a confirmation',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -88,7 +88,7 @@ void main() {
     expect(BasketService.instance.totalQuantity, 2);
   });
 
-  // Test 3: Customers cannot add zero tickets.
+  
   testWidgets('Adding zero tickets displays a warning',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -107,7 +107,7 @@ void main() {
     expect(BasketService.instance.totalQuantity, 0);
   });
 
-  // Test 4: The five-ticket limit is enforced.
+  
   testWidgets('Adding more than five tickets is prevented',
       (WidgetTester tester) async {
     BasketService.instance.addMovie(testMovie, 4);
@@ -130,7 +130,7 @@ void main() {
     expect(BasketService.instance.totalQuantity, 4);
   });
 
-  // Test 5: The basket button opens the basket screen.
+  
   testWidgets('Basket button opens the basket screen',
       (WidgetTester tester) async {
     await openMovieListing(tester);

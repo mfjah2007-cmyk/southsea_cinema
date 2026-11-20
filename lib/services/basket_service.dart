@@ -15,16 +15,16 @@ class BasketItem {
 }
 
 class BasketService {
-  // Create one shared instance of BasketService.
+  
   static final BasketService instance = BasketService._internal();
 
-  // Private constructor prevents other instances being created.
+
   BasketService._internal();
 
-  // The basket's contents.
+  
   final List<BasketItem> items = [];
 
-  // Calculate how many tickets are currently in the basket.
+  
   int get totalQuantity {
     int total = 0;
 

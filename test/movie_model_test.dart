@@ -2,9 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/movie.dart';
 
 void main() {
-  // Group together tests for the Movie model.
+  
   group('Movie model tests', () {
-    // Test that the Movie constructor stores information correctly.
+    
     test('Movie constructor assigns properties correctly', () {
       const movie = Movie(
         id: '1',
@@ -24,7 +24,7 @@ void main() {
       expect(movie.imagePath, 'assets/images/maze_runner.jpeg');
     });
 
-    // Test that prices display with two decimal places.
+    
     test('formattedPrice displays two decimal places', () {
       const movie = Movie(
         id: '1',
@@ -39,7 +39,7 @@ void main() {
       expect(movie.formattedPrice, '£7.50');
     });
 
-    // Test that whole-pound prices also display two decimal places.
+    
     test('formattedPrice displays two decimal places for whole pounds', () {
       const movie = Movie(
         id: '2',
