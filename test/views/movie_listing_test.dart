@@ -86,27 +86,27 @@ void main() {
   });
 
   // Test that customers cannot add zero tickets.// Test that customers cannot add zero tickets.
-testWidgets('Adding zero tickets displays a warning',
-    (WidgetTester tester) async {
-  await openMovieListing(tester);
+  testWidgets('Adding zero tickets displays a warning',
+      (WidgetTester tester) async {
+    await openMovieListing(tester);
 
-  // Scroll the button into view.
-  await tester.ensureVisible(find.text('ADD TO ORDER'));
-  await tester.pumpAndSettle();
+    // Scroll the button into view.
+    await tester.ensureVisible(find.text('ADD TO ORDER'));
+    await tester.pumpAndSettle();
 
-  // Tap the button without selecting any tickets.
-  await tester.tap(find.text('ADD TO ORDER'));
-  await tester.pumpAndSettle();
+    // Tap the button without selecting any tickets.
+    await tester.tap(find.text('ADD TO ORDER'));
+    await tester.pumpAndSettle();
 
-  // Check that the warning is displayed.
-  expect(
-    find.text('Please select at least one ticket.'),
-    findsOneWidget,
-  );
+    // Check that the warning is displayed.
+    expect(
+      find.text('Please select at least one ticket.'),
+      findsOneWidget,
+    );
 
-  // Check that no tickets were added.
-  expect(BasketService.instance.totalQuantity, 0);
-});
+    // Check that no tickets were added.
+    expect(BasketService.instance.totalQuantity, 0);
+  });
 
   // Test that the five-ticket limit is enforced.
   testWidgets('Adding more than five tickets is prevented',
