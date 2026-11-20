@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/movie.dart';
@@ -25,8 +24,7 @@ void main() {
   });
 
   // Test 1: The basket screen displays correctly.
-  testWidgets('Basket screen displays correctly',
-      (WidgetTester tester) async {
+  testWidgets('Basket screen displays correctly', (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: BasketView(),
@@ -37,8 +35,7 @@ void main() {
   });
 
   // Test 2: Added movies appear in the basket.
-  testWidgets('Added movie appears in the basket',
-      (WidgetTester tester) async {
+  testWidgets('Added movie appears in the basket', (WidgetTester tester) async {
     BasketService.instance.addMovie(testMovie, 2);
 
     await tester.pumpWidget(
@@ -76,8 +73,9 @@ void main() {
       ),
     );
 
-    await tester.ensureVisible(find.byIcon(Icons.delete));
-    await tester.tap(find.byIcon(Icons.delete));
+    // Tap the REMOVE button.
+    await tester.tap(find.text('REMOVE'));
+    await tester.pumpAndSettle();
     await tester.pumpAndSettle();
 
     expect(BasketService.instance.items, isEmpty);
