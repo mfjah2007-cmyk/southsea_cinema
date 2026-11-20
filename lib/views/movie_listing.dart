@@ -38,7 +38,7 @@ class _MovieListingState extends State<MovieListing> {
         backgroundColor: cinemaSurface,
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
-        actions: const[
+        actions: const [
           BasketButton(),
         ],
       ),
