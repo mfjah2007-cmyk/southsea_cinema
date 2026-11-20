@@ -52,7 +52,7 @@ class _CheckoutViewState extends State<CheckoutView> {
       });
 
       // Empty the basket after confirmation.
-      BasketService.clearBasket();
+      BasketService.instance.clearBasket();
     }
   }
 
@@ -164,7 +164,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   const SizedBox(height: 15),
 
                   // Display each movie in the basket.
-                  for (BasketItem item in BasketService.items)
+                  for (BasketItem item in BasketService.instance.items)
                     Card(
                       color: Colors.white,
                       child: ListTile(
@@ -257,7 +257,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: BasketService.items.isEmpty
+                            onPressed: BasketService.instance.items.isEmpty
                                 ? null
                                 : _confirmBooking,
                             style: ElevatedButton.styleFrom(

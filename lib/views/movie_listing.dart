@@ -183,7 +183,7 @@ class _MovieListingState extends State<MovieListing> {
                     });
                   } else {
                     // Try to add the tickets to the basket.
-                    bool added = BasketService.addMovie(
+                    bool added = BasketService.instance.addMovie(
                       widget.movie,
                       _ticketQuantity,
                     );

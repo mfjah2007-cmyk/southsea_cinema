@@ -29,7 +29,7 @@ class _BasketViewState extends State<BasketView> {
         ],
       ),
       drawer: const NavDrawer(),
-      body: BasketService.items.isEmpty
+      body: BasketService.instance.items.isEmpty
           ? const Center(
               child: Text(
                 'Your basket is empty.',
@@ -42,7 +42,7 @@ class _BasketViewState extends State<BasketView> {
           : ListView(
               padding: const EdgeInsets.all(12),
               children: [
-                for (int i = 0; i < BasketService.items.length; i++)
+                for (int i = 0; i < BasketService.instance.items.length; i++)
                   Card(
                     color: Colors.white,
                     margin: const EdgeInsets.only(bottom: 12),
@@ -52,7 +52,7 @@ class _BasketViewState extends State<BasketView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            BasketService.items[i].movie.title,
+                            BasketService.instance.items[i].movie.title,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -61,17 +61,17 @@ class _BasketViewState extends State<BasketView> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Tickets: ${BasketService.items[i].quantity}',
+                            'Tickets: ${BasketService.instance.items[i].quantity}',
                             style: const TextStyle(color: Colors.black),
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            'Price per ticket: £${BasketService.items[i].movie.ticketPrice.toStringAsFixed(2)}',
+                            'Price per ticket: £${BasketService.instance.items[i].movie.ticketPrice.toStringAsFixed(2)}',
                             style: const TextStyle(color: Colors.black),
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            'Subtotal: £${BasketService.items[i].totalPrice.toStringAsFixed(2)}',
+                            'Subtotal: £${BasketService.instance.items[i].totalPrice.toStringAsFixed(2)}',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
@@ -81,7 +81,7 @@ class _BasketViewState extends State<BasketView> {
                           TextButton(
                             onPressed: () {
                               setState(() {
-                                BasketService.removeMovie(i);
+                                BasketService.instance.removeMovie(i);
                               });
                             },
                             child: const Text('REMOVE'),
