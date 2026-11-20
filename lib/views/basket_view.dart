@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/services/basket_service.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/views/checkout_view.dart';
-
+import 'package:southsea_cinema/widgets/basket_button.dart';
 class BasketView extends StatefulWidget {
   const BasketView({super.key});
 
@@ -24,6 +23,9 @@ class _BasketViewState extends State<BasketView> {
         backgroundColor: cinemaSurface,
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
+        actions: const [
+          BasketButton(),
+        ],
       ),
       drawer: const NavDrawer(),
       body: BasketService.items.isEmpty
