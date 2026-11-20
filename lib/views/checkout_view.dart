@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/services/basket_service.dart';
+import 'package:southsea_cinema/widgets/basket_button.dart';
 
 class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key});
@@ -66,6 +67,9 @@ class _CheckoutViewState extends State<CheckoutView> {
         backgroundColor: cinemaSurface,
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
+        actions: const [
+          BasketButton(),
+        ],
       ),
 
       // Show the confirmation screen after booking.
