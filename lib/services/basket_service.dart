@@ -1,3 +1,4 @@
+
 import 'package:southsea_cinema/models/movie.dart';
 
 class BasketItem {
@@ -15,10 +16,17 @@ class BasketItem {
 }
 
 class BasketService {
-  static final List<BasketItem> items = [];
+  // Create one shared instance of BasketService.
+  static final BasketService instance = BasketService._internal();
+
+  // Private constructor prevents other instances being created.
+  BasketService._internal();
+
+  // The basket's contents.
+  final List<BasketItem> items = [];
 
   // Calculate how many tickets are currently in the basket.
-  static int get totalQuantity {
+  int get totalQuantity {
     int total = 0;
 
     for (BasketItem item in items) {
@@ -29,7 +37,7 @@ class BasketService {
   }
 
   // Add a movie, provided the five-ticket limit is not exceeded.
-  static bool addMovie(Movie movie, int quantity) {
+  bool addMovie(Movie movie, int quantity) {
     if (totalQuantity + quantity > 5) {
       return false;
     }
@@ -53,7 +61,7 @@ class BasketService {
   }
 
   // Calculate the total basket price.
-  static double get totalPrice {
+  double get totalPrice {
     double total = 0;
 
     for (BasketItem item in items) {
@@ -64,12 +72,13 @@ class BasketService {
   }
 
   // Remove a movie from the basket.
-  static void removeMovie(int index) {
+  void removeMovie(int index) {
     items.removeAt(index);
   }
 
   // Empty the basket after a booking is confirmed.
-  static void clearBasket() {
+  void clearBasket() {
     items.clear();
   }
 }
+
