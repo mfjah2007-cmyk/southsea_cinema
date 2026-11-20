@@ -37,15 +37,21 @@ void main() {
 
   // Select a ticket quantity from the dropdown.
   Future<void> selectTickets(
-    WidgetTester tester,
-    String quantity,
-  ) async {
-    await tester.tap(find.byType(DropdownMenu<int>));
-    await tester.pumpAndSettle();
+  WidgetTester tester,
+  String quantity,
+) async {
+  // Scroll the dropdown into view.
+  await tester.ensureVisible(find.byType(DropdownMenu<int>));
+  await tester.pumpAndSettle();
 
-    await tester.tap(find.text(quantity).last);
-    await tester.pumpAndSettle();
-  }
+  // Open the dropdown.
+  await tester.tap(find.byType(DropdownMenu<int>));
+  await tester.pumpAndSettle();
+
+  // Select the requested quantity.
+  await tester.tap(find.text(quantity).last);
+  await tester.pumpAndSettle();
+}
 
   // Test that selecting tickets updates the total price.
   testWidgets('Selecting tickets updates the total price',
@@ -64,7 +70,11 @@ void main() {
 
     await selectTickets(tester, '2');
 
+    await tester.ensureVisible(find.text('ADD TO ORDER'));
+    await tester.pumpAndSettle();
+
     await tester.tap(find.text('ADD TO ORDER'));
+    await tester.pumpAndSettle();
     await tester.pumpAndSettle();
 
     expect(
@@ -100,7 +110,11 @@ void main() {
 
     await selectTickets(tester, '2');
 
+    await tester.ensureVisible(find.text('ADD TO ORDER'));
+    await tester.pumpAndSettle();
+
     await tester.tap(find.text('ADD TO ORDER'));
+    await tester.pumpAndSettle();
     await tester.pumpAndSettle();
 
     expect(
