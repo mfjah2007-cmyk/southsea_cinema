@@ -27,3 +27,4 @@ flutter:
   # Register the cinema poster images
   assets:
     - assets/images/
+    - assets/data/movies.json
