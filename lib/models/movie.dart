@@ -1,3 +1,4 @@
+
 class Movie {
   final String id;
   final String title;
@@ -17,6 +18,7 @@ class Movie {
     required this.imagePath,
   });
 
+  // Create a Movie object from JSON data.
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       id: json['id'] as String,
@@ -29,8 +31,9 @@ class Movie {
     );
   }
 
- 
+  // Return the ticket price formatted to two decimal places.
   String get formattedPrice {
     return '£${ticketPrice.toStringAsFixed(2)}';
   }
 }
+

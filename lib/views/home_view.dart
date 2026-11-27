@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/repositories/movie_repository.dart';
@@ -5,6 +6,7 @@ import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/basket_button.dart';
+import 'package:southsea_cinema/models/movie.dart'
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -31,7 +33,7 @@ class HomeView extends StatelessWidget {
       drawer: const NavDrawer(),
 
       // Wait for the movies to load before displaying them.
-      body: FutureBuilder(
+      body: FutureBuilder<List<Movie>>(
         future: moviesFuture,
         builder: (context, snapshot) {
           // Show a loading indicator while the movies load.
