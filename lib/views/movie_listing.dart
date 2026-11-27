@@ -1,10 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/services/basket_service.dart';
+import 'package:southsea_cinema/views/basket_view.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/widgets/basket_button.dart';
 
 class MovieListing extends StatefulWidget {
-  const MovieListing({super.key});
+  final Movie movie;
+
+  const MovieListing({
+    super.key,
+    required this.movie,
+  });
 
   @override
   State<MovieListing> createState() => _MovieListingState();
@@ -14,14 +22,25 @@ class _MovieListingState extends State<MovieListing> {
   int _ticketQuantity = 0;
   String _bookingMessage = '';
 
+  // Calculate the total price for the selected tickets.
+  double get _totalPrice {
+    return _ticketQuantity * widget.movie.ticketPrice;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(appTitle, style: cinemaHeaderStyle),
+        title: Text(
+          widget.movie.title,
+          style: cinemaHeaderStyle,
+        ),
         backgroundColor: cinemaSurface,
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
+        actions: const [
+          BasketButton(),
+        ],
       ),
       drawer: const NavDrawer(),
       body: SingleChildScrollView(
@@ -33,68 +52,83 @@ class _MovieListingState extends State<MovieListing> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'The Maze Runner (2014) (PG-13)',
-                style: TextStyle(
+              // Display the movie title and age rating.
+              Text(
+                '${widget.movie.title} (${widget.movie.ageRating})',
+                style: const TextStyle(
                   fontSize: 28,
-                  color: Colors.white,
+                  color: cinemaFontWhite,
                 ),
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
+
+              // Display the complete movie poster.
+              SizedBox(
+                height: 220,
+                width: double.infinity,
+                child: Image.asset(
+                  widget.movie.imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Display the movie synopsis.
+              Text(
+                widget.movie.synopsis,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 30),
 
               const Text(
                 'Southsea Cinema Room',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.white,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Display the screening date and time.
+              Text(
+                widget.movie.screeningTime,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              const Text(
+                'Select Quantities (Up to 5 in total)',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: cinemaFontWhite,
                 ),
               ),
 
               const SizedBox(height: 20),
 
               const Text(
-                'Thursday 15 Oct 2026, 18:00 - ends at 19:53',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-
-              const SizedBox(height: 50),
-
-              const Text(
-                'Please note that Discounts / Membership Benefits '
-                'will be applied once you have selected your tickets',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-
-              const SizedBox(height: 22),
-
-              const Text(
-                'Select Quantities (Up to 5 in total)',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-
-              const SizedBox(height: 44),
-
-              const Text(
                 'Tickets',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: cinemaFontWhite,
                 ),
               ),
 
               const SizedBox(height: 12),
 
+              // Allow customers to select their ticket quantity.
               Row(
                 children: [
                   DropdownMenu<int>(
@@ -103,25 +137,22 @@ class _MovieListingState extends State<MovieListing> {
                       if (value != null) {
                         setState(() {
                           _ticketQuantity = value;
-                          print('Tickets selected: $_ticketQuantity');
+                          _bookingMessage = '';
                         });
                       }
                     },
                     dropdownMenuEntries: [
-                      DropdownMenuEntry(value: 0, label: '0'),
-                      DropdownMenuEntry(value: 1, label: '1'),
-                      DropdownMenuEntry(value: 2, label: '2'),
-                      DropdownMenuEntry(value: 3, label: '3'),
-                      DropdownMenuEntry(value: 4, label: '4'),
-                      DropdownMenuEntry(value: 5, label: '5'),
+                      for (int i = 0; i <= 5; i++)
+                        DropdownMenuEntry<int>(
+                          value: i,
+                          label: '$i',
+                        ),
                     ],
                   ),
-
                   const SizedBox(width: 12),
-
-                  const Text(
-                    'Adult (£7.50)',
-                    style: TextStyle(
+                  Text(
+                    'Adult (${widget.movie.formattedPrice})',
+                    style: const TextStyle(
                       fontSize: 16,
                       color: cinemaBrand,
                     ),
@@ -129,14 +160,44 @@ class _MovieListingState extends State<MovieListing> {
                 ],
               ),
 
-              const SizedBox(height: 34),
+              const SizedBox(height: 20),
 
+              // Display the calculated total price.
+              Text(
+                'Total: £${_totalPrice.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: cinemaFontWhite,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // Add the selected tickets to the basket.
               ElevatedButton(
                 onPressed: () {
-                  setState(() {
-                    _bookingMessage =
-                        'Added $_ticketQuantity tickets to the order';
-                  });
+                  if (_ticketQuantity == 0) {
+                    setState(() {
+                      _bookingMessage = 'Please select at least one ticket.';
+                    });
+                  } else {
+                    // Try to add the tickets to the basket.
+                    bool added = BasketService.instance.addMovie(
+                      widget.movie,
+                      _ticketQuantity,
+                    );
+
+                    setState(() {
+                      if (added) {
+                        _bookingMessage =
+                            'Added $_ticketQuantity tickets to your basket.';
+                      } else {
+                        _bookingMessage =
+                            'You can only order 5 tickets in total.';
+                      }
+                    });
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: cinemaBrand,
@@ -150,12 +211,28 @@ class _MovieListingState extends State<MovieListing> {
 
               const SizedBox(height: 15),
 
+              // Display the booking confirmation.
               Text(
                 _bookingMessage,
                 style: const TextStyle(
                   fontSize: 16,
                   color: cinemaFontWhite,
                 ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Navigate to the basket page.
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BasketView(),
+                    ),
+                  );
+                },
+                child: const Text('VIEW BASKET'),
               ),
             ],
           ),
@@ -164,8 +241,3 @@ class _MovieListingState extends State<MovieListing> {
     );
   }
 }
-
-
-
-// Add a function(ality) when elevated button is pressed and also use the variable in a text
-

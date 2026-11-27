@@ -1,0 +1,21 @@
+
+[
+  {
+    "id": "1",
+    "title": "The Maze Runner",
+    "synopsis": "A young man wakes up in a mysterious maze.",
+    "ageRating": "PG-13",
+    "screeningTime": "Thursday 15 Oct 2026, 18:00",
+    "ticketPrice": 7.50,
+    "imagePath": "assets/images/maze_runner.jpeg"
+  },
+  {
+    "id": "2",
+    "title": "The Hunger Games",
+    "synopsis": "A young woman takes part in a dangerous televised competition.",
+    "ageRating": "12A",
+    "screeningTime": "Friday 16 Oct 2026, 18:00",
+    "ticketPrice": 7.50,
+    "imagePath": "assets/images/hunger_games.jpeg"
+  }
+]
