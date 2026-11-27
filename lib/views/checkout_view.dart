@@ -11,15 +11,12 @@ class CheckoutView extends StatefulWidget {
 }
 
 class _CheckoutViewState extends State<CheckoutView> {
-  
   final _formKey = GlobalKey<FormState>();
 
-  
   final TextEditingController _nameController = TextEditingController();
 
   final TextEditingController _emailController = TextEditingController();
 
-  
   bool _bookingConfirmed = false;
   String _confirmedName = '';
   String _confirmedEmail = '';
@@ -33,10 +30,8 @@ class _CheckoutViewState extends State<CheckoutView> {
     super.dispose();
   }
 
-  
   void _confirmBooking() {
     if (_formKey.currentState!.validate()) {
-      
       final customerName = _nameController.text.trim();
       final customerEmail = _emailController.text.trim();
       final orderTotal = BasketService.instance.totalPrice;
@@ -51,7 +46,6 @@ class _CheckoutViewState extends State<CheckoutView> {
         _bookingConfirmed = true;
       });
 
-      
       BasketService.instance.clearBasket();
     }
   }
@@ -71,8 +65,6 @@ class _CheckoutViewState extends State<CheckoutView> {
           BasketButton(),
         ],
       ),
-
-      
       body: _bookingConfirmed
           ? Center(
               child: SingleChildScrollView(
@@ -135,7 +127,6 @@ class _CheckoutViewState extends State<CheckoutView> {
                     const SizedBox(height: 25),
                     ElevatedButton(
                       onPressed: () {
-                        
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                       },
@@ -145,8 +136,6 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
               ),
             )
-
-          
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -215,7 +204,6 @@ class _CheckoutViewState extends State<CheckoutView> {
 
                   const SizedBox(height: 15),
 
-                  
                   Form(
                     key: _formKey,
                     child: Column(

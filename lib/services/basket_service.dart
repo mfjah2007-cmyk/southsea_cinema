@@ -15,16 +15,12 @@ class BasketItem {
 }
 
 class BasketService {
-  
   static final BasketService instance = BasketService._internal();
-
 
   BasketService._internal();
 
-  
   final List<BasketItem> items = [];
 
-  
   int get totalQuantity {
     int total = 0;
 

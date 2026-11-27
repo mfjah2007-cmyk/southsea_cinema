@@ -26,7 +26,6 @@ void main() {
     BasketService.instance.clearBasket();
   });
 
-  
   Future<void> openMovieListing(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -39,25 +38,20 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  
   Future<void> selectTickets(
     WidgetTester tester,
     String quantity,
   ) async {
-    
     await tester.ensureVisible(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();
 
-    
     await tester.tap(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();
 
-    
     await tester.tap(find.text(quantity).last);
     await tester.pumpAndSettle();
   }
 
-  
   testWidgets('Selecting tickets updates the total price',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -67,7 +61,6 @@ void main() {
     expect(find.text('Total: £15.00'), findsOneWidget);
   });
 
-  
   testWidgets('Adding tickets displays a confirmation',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -88,7 +81,6 @@ void main() {
     expect(BasketService.instance.totalQuantity, 2);
   });
 
-  
   testWidgets('Adding zero tickets displays a warning',
       (WidgetTester tester) async {
     await openMovieListing(tester);
@@ -107,7 +99,6 @@ void main() {
     expect(BasketService.instance.totalQuantity, 0);
   });
 
-  
   testWidgets('Adding more than five tickets is prevented',
       (WidgetTester tester) async {
     BasketService.instance.addMovie(testMovie, 4);
@@ -130,7 +121,6 @@ void main() {
     expect(BasketService.instance.totalQuantity, 4);
   });
 
-  
   testWidgets('Basket button opens the basket screen',
       (WidgetTester tester) async {
     await openMovieListing(tester);

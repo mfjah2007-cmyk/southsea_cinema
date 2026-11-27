@@ -1,4 +1,3 @@
-
 class Movie {
   final String id;
   final String title;
@@ -36,4 +35,3 @@ class Movie {
     return '£${ticketPrice.toStringAsFixed(2)}';
   }
 }
-

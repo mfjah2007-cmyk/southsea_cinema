@@ -23,7 +23,6 @@ void main() {
     BasketService.instance.clearBasket();
   });
 
-  
   testWidgets('Basket screen displays correctly', (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -34,7 +33,6 @@ void main() {
     expect(find.text('My Basket'), findsOneWidget);
   });
 
-  
   testWidgets('Added movie appears in the basket', (WidgetTester tester) async {
     BasketService.instance.addMovie(testMovie, 2);
 
@@ -47,7 +45,6 @@ void main() {
     expect(find.text('The Maze Runner'), findsOneWidget);
   });
 
-  
   testWidgets('Basket displays the correct ticket quantity',
       (WidgetTester tester) async {
     BasketService.instance.addMovie(testMovie, 2);
